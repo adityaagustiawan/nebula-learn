@@ -20,7 +20,7 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function DashboardPage() {
-  const { user, loading } = useAuth();
+  const { user, profile: authProfile, loading, isDemo } = useAuth();
   const navigate = useNavigate();
   const [profile, setProfile] = useState({ full_name: "", github_username: "", bio: "" });
   const [saving, setSaving] = useState(false);
@@ -30,20 +30,33 @@ function DashboardPage() {
 
   useEffect(() => {
     if (!user) return;
+    if (isDemo && authProfile) {
+      setProfile({
+        full_name: (authProfile as any).full_name ?? "",
+        github_username: (authProfile as any).github_username ?? "",
+        bio: (authProfile as any).bio ?? "",
+      });
+      return;
+    }
     supabase.from("profiles").select("full_name, github_username, bio").eq("id", user.id).maybeSingle().then(({ data }) => {
       if (data) setProfile({ full_name: data.full_name ?? "", github_username: data.github_username ?? "", bio: data.bio ?? "" });
-    });
-  }, [user]);
+    }).catch(() => {});
+  }, [user, isDemo, authProfile]);
 
   async function save() {
     if (!user) return;
+    if (isDemo) { toast.success("Profile saved (demo mode)"); return; }
     setSaving(true);
     const handle = profile.github_username.trim().replace(/^@/, "").replace(/^https?:\/\/github\.com\//, "") || null;
-    const { error } = await supabase.from("profiles").update({
-      full_name: profile.full_name || null, github_username: handle, bio: profile.bio || null, updated_at: new Date().toISOString(),
-    }).eq("id", user.id);
+    try {
+      const { error } = await supabase.from("profiles").update({
+        full_name: profile.full_name || null, github_username: handle, bio: profile.bio || null, updated_at: new Date().toISOString(),
+      }).eq("id", user.id);
+      if (error) toast.error(error.message); else toast.success("Profile saved");
+    } catch (e) {
+      toast.error("Failed to save profile");
+    }
     setSaving(false);
-    if (error) toast.error(error.message); else toast.success("Profile saved");
   }
 
   if (loading || !user) return <div className="min-h-screen grid place-items-center text-muted-foreground">Loading…</div>;
