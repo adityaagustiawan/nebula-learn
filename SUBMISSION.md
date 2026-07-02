@@ -10,6 +10,9 @@
 - **Universitas**: Universitas Amikom Yogyakarta  
 - **Submission**: TopRank Web Application (Vercel Deploy)  
 - **Live URL**: https://nebulalearn-umber.vercel.app/  
+- **Demo Admin Credentials**:
+  - Email: `admin@nebulalearn.com`
+  - Password: `admin123`  
 
 ---
 
