@@ -63,6 +63,10 @@ function LoginPage() {
           <h1 className="text-3xl font-bold text-center">Welcome to <span className="text-gradient">NebulaLearn</span></h1>
           <p className="text-center text-sm text-muted-foreground mt-2">Sign in to access your drive, projects, and progress.</p>
 
+          <div className="mt-4 p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg text-xs text-yellow-300">
+            <strong>Admin Access:</strong> To access admin pages, login with an account that has <code className="bg-yellow-500/20 px-1 rounded">role = "admin"</code> in the Supabase <code>profiles</code> table.
+          </div>
+
           <Button onClick={google} disabled={loading} variant="outline" className="mt-6 w-full h-11">
             <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24"><path fill="currentColor" d="M21.35 11.1H12v3.2h5.35c-.23 1.25-1.5 3.65-5.35 3.65-3.22 0-5.85-2.66-5.85-5.95s2.63-5.95 5.85-5.95c1.83 0 3.06.78 3.76 1.45l2.56-2.48C16.79 3.6 14.6 2.6 12 2.6 6.95 2.6 2.85 6.7 2.85 11.75S6.95 20.9 12 20.9c6.93 0 9.45-4.85 9.45-7.4 0-.5-.05-.88-.1-1.4z" /></svg>
             Continue with Google
