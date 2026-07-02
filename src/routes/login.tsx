@@ -11,6 +11,10 @@ import { toast } from "sonner";
 import { useAuth } from "@/hooks/use-auth";
 import { useEffect } from "react";
 
+// Demo Admin Credentials (for testing without Supabase setup)
+const DEMO_ADMIN_EMAIL = "admin@nebulalearn.com";
+const DEMO_ADMIN_PASSWORD = "admin123";
+
 export const Route = createFileRoute("/login")({
   component: LoginPage,
   head: () => ({ meta: [{ title: "Sign in — NebulaLearn" }] }),
@@ -21,13 +25,36 @@ function LoginPage() {
   const [pw, setPw] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [useDemoAuth, setUseDemoAuth] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
 
   useEffect(() => { if (user) navigate({ to: "/dashboard" }); }, [user, navigate]);
 
+  // Demo admin login handler
+  async function demoAdminLogin() {
+    setLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 500));
+    toast.success("Demo Admin Login Successful!");
+    // Store demo auth in localStorage
+    localStorage.setItem("demoAuth", JSON.stringify({ 
+      email: DEMO_ADMIN_EMAIL, 
+      role: "admin", 
+      name: "Demo Admin" 
+    }));
+    setLoading(false);
+    navigate({ to: "/admin" });
+  }
+
   async function signIn(e: React.FormEvent) {
-    e.preventDefault(); setLoading(true);
+    e.preventDefault(); 
+    
+    // Check for demo admin credentials first
+    if (email === DEMO_ADMIN_EMAIL && pw === DEMO_ADMIN_PASSWORD) {
+      return demoAdminLogin();
+    }
+    
+    setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password: pw });
     setLoading(false);
     if (error) toast.error(error.message); else { toast.success("Welcome back"); navigate({ to: "/dashboard" }); }
@@ -63,8 +90,20 @@ function LoginPage() {
           <h1 className="text-3xl font-bold text-center">Welcome to <span className="text-gradient">NebulaLearn</span></h1>
           <p className="text-center text-sm text-muted-foreground mt-2">Sign in to access your drive, projects, and progress.</p>
 
-          <div className="mt-4 p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg text-xs text-yellow-300">
-            <strong>Admin Access:</strong> To access admin pages, login with an account that has <code className="bg-yellow-500/20 px-1 rounded">role = "admin"</code> in the Supabase <code>profiles</code> table.
+          {/* Demo Admin Info */}
+          <div className="mt-4 p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
+            <p className="text-sm text-blue-300 mb-2 font-semibold">🚀 Demo Mode Available!</p>
+            <div className="text-xs text-blue-200 space-y-1">
+              <p><strong>Admin Email:</strong> <code className="bg-blue-500/20 px-1 rounded">{DEMO_ADMIN_EMAIL}</code></p>
+              <p><strong>Admin Password:</strong> <code className="bg-blue-500/20 px-1 rounded">{DEMO_ADMIN_PASSWORD}</code></p>
+            </div>
+            <Button 
+              onClick={demoAdminLogin} 
+              disabled={loading}
+              className="w-full mt-3 bg-blue-600 hover:bg-blue-700 text-white"
+            >
+              {loading ? "Logging in..." : "Quick Demo Admin Login"}
+            </Button>
           </div>
 
           <Button onClick={google} disabled={loading} variant="outline" className="mt-6 w-full h-11">

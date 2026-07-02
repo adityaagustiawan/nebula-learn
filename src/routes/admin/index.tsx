@@ -7,6 +7,16 @@ import { Users, Award, Gift, Briefcase, TrendingUp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
+// Mock Demo Data
+const DEMO_STATS = {
+  totalStudents: 42,
+  pendingSkills: 5,
+  pendingPortfolios: 3,
+  pendingCertificates: 2,
+  totalRewards: 8,
+  totalOpportunities: 12,
+};
+
 export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
 });
@@ -23,6 +33,13 @@ function AdminDashboard() {
   });
 
   useEffect(() => {
+    // Check for demo mode
+    const demoAuth = localStorage.getItem("demoAuth");
+    if (demoAuth) {
+      setStats(DEMO_STATS);
+      return;
+    }
+    
     fetchStats();
   }, []);
 

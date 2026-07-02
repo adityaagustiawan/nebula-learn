@@ -8,6 +8,15 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Search } from "lucide-react";
 
+// Mock Demo Students
+const DEMO_STUDENTS = [
+  { id: "1", full_name: "Adytia Agustiawan", email: "adytia@example.com", major: "Teknik Informatika", total_points: 1250 },
+  { id: "2", full_name: "Budi Santoso", email: "budi@example.com", major: "Sistem Informasi", total_points: 980 },
+  { id: "3", full_name: "Citra Dewi", email: "citra@example.com", major: "Teknik Informatika", total_points: 875 },
+  { id: "4", full_name: "Dimas Pratama", email: "dimas@example.com", major: "Teknik Komputer", total_points: 750 },
+  { id: "5", full_name: "Eka Putri", email: "eka@example.com", major: "Sistem Informasi", total_points: 620 },
+];
+
 export const Route = createFileRoute("/admin/students")({
   component: AdminStudents,
 });
@@ -19,6 +28,14 @@ function AdminStudents() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Check demo mode first
+    const demoAuth = localStorage.getItem("demoAuth");
+    if (demoAuth) {
+      setStudents(DEMO_STUDENTS);
+      setLoading(false);
+      return;
+    }
+
     if (profile?.role === "admin") {
       fetchStudents();
     }
@@ -41,6 +58,16 @@ function AdminStudents() {
   };
 
   useEffect(() => {
+    const demoAuth = localStorage.getItem("demoAuth");
+    if (demoAuth) {
+      const filtered = DEMO_STUDENTS.filter(s => 
+        s.full_name.toLowerCase().includes(search.toLowerCase()) || 
+        s.email.toLowerCase().includes(search.toLowerCase()) || 
+        s.major.toLowerCase().includes(search.toLowerCase())
+      );
+      setStudents(filtered);
+      return;
+    }
     fetchStudents();
   }, [search]);
 
