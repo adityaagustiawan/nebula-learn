@@ -25,15 +25,15 @@ function LoginPage() {
 
   useEffect(() => { if (user) navigate({ to: "/dashboard" }); }, [user, navigate]);
 
-  function demoLogin(role: "admin" | "mahasiswa") {
+  function demoLogin(role: "admin" | "mahasiswa", emailOverride?: string, nameOverride?: string) {
     setLoading(true);
     setTimeout(() => {
       localStorage.setItem("demoAuth", JSON.stringify({
-        email: role === "admin" ? "admin@nebulalearn.com" : "mahasiswa@nebulalearn.com",
+        email: emailOverride || (role === "admin" ? "admin@nebulalearn.com" : "mahasiswa@nebulalearn.com"),
         role,
-        name: role === "admin" ? "Demo Admin" : "Adytia Agustiawan",
+        name: nameOverride || (role === "admin" ? "Demo Admin" : "Adytia Agustiawan"),
       }));
-      toast.success(`Demo ${role === "admin" ? "Admin" : "Mahasiswa"} Login Successful!`);
+      toast.success(`Welcome, ${nameOverride || (role === "admin" ? "Admin" : "Mahasiswa")}!`);
       setLoading(false);
       navigate({ to: role === "admin" ? "/admin" : "/dashboard" });
     }, 300);
@@ -43,6 +43,7 @@ function LoginPage() {
     e.preventDefault();
     if (email === "admin@nebulalearn.com" && pw === "admin123") return demoLogin("admin");
     if (email === "mahasiswa@nebulalearn.com" && pw === "mahasiswa123") return demoLogin("mahasiswa");
+    if (email === "a.agustiawan@students.amikom.ac.id" && pw === "kNbrDPxU") return demoLogin("admin", "a.agustiawan@students.amikom.ac.id", "Adytia Agustiawan");
     setLoading(true);
     try {
       const { error } = await supabase.auth.signInWithPassword({ email, password: pw });
@@ -94,12 +95,15 @@ function LoginPage() {
 
           <div className="mt-4 p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
             <p className="text-sm text-blue-300 mb-3 font-semibold">Quick Demo Login</p>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-3 gap-2">
               <Button onClick={() => demoLogin("admin")} disabled={loading} className="bg-blue-600 hover:bg-blue-700 text-white text-xs h-9">
                 Admin Demo
               </Button>
               <Button onClick={() => demoLogin("mahasiswa")} disabled={loading} variant="outline" className="text-xs h-9">
                 Mahasiswa Demo
+              </Button>
+              <Button onClick={() => demoLogin("admin", "a.agustiawan@students.amikom.ac.id", "Adytia Agustiawan")} disabled={loading} className="bg-green-600 hover:bg-green-700 text-white text-xs h-9">
+                Staff Login
               </Button>
             </div>
             <div className="mt-2 text-[10px] text-blue-200/60 space-y-0.5">
