@@ -22,7 +22,7 @@ export const Route = createFileRoute("/admin/students")({
 });
 
 function AdminStudents() {
-  const { profile } = useAuth();
+  const { profile, loading: authLoading } = useAuth();
   const [students, setStudents] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
@@ -70,6 +70,8 @@ function AdminStudents() {
     }
     fetchStudents();
   }, [search]);
+
+  if (authLoading) return <div className="min-h-screen grid place-items-center text-muted-foreground">Loading…</div>;
 
   if (profile?.role !== "admin") {
     return (

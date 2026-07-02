@@ -18,7 +18,7 @@ export const Route = createFileRoute("/admin/rewards")({
 });
 
 function AdminRewards() {
-  const { user, profile } = useAuth();
+  const { user, profile, loading: authLoading } = useAuth();
   const [rewards, setRewards] = useState<any[]>([]);
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [newReward, setNewReward] = useState({ name: "", description: "", required_points: 0, is_active: true });
@@ -85,6 +85,8 @@ function AdminRewards() {
       toast.error("Failed to delete reward");
     }
   };
+
+  if (authLoading) return <div className="min-h-screen grid place-items-center text-muted-foreground">Loading…</div>;
 
   if (profile?.role !== "admin") {
     return (

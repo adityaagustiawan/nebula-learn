@@ -17,7 +17,7 @@ export const Route = createFileRoute("/admin/verification")({
 });
 
 function AdminVerification() {
-  const { user, profile } = useAuth();
+  const { user, profile, loading: authLoading } = useAuth();
   const [pendingSkills, setPendingSkills] = useState<any[]>([]);
   const [pendingPortfolios, setPendingPortfolios] = useState<any[]>([]);
   const [pendingCertificates, setPendingCertificates] = useState<any[]>([]);
@@ -86,6 +86,8 @@ function AdminVerification() {
       toast.error("Failed to review item");
     }
   };
+
+  if (authLoading) return <div className="min-h-screen grid place-items-center text-muted-foreground">Loading…</div>;
 
   if (profile?.role !== "admin") {
     return (

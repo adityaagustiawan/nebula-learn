@@ -22,7 +22,7 @@ export const Route = createFileRoute("/admin/")({
 });
 
 function AdminDashboard() {
-  const { profile } = useAuth();
+  const { profile, loading: authLoading } = useAuth();
   const [stats, setStats] = useState({
     totalStudents: 0,
     pendingSkills: 0,
@@ -73,6 +73,8 @@ function AdminDashboard() {
       console.error("Error fetching stats:", error);
     }
   };
+
+  if (authLoading) return <div className="min-h-screen grid place-items-center text-muted-foreground">Loading…</div>;
 
   if (profile?.role !== "admin") {
     return (

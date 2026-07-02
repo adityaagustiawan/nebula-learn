@@ -20,7 +20,7 @@ export const Route = createFileRoute("/admin/opportunities")({
 });
 
 function AdminOpportunities() {
-  const { user, profile } = useAuth();
+  const { user, profile, loading: authLoading } = useAuth();
   const [opportunities, setOpportunities] = useState<any[]>([]);
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [newOpportunity, setNewOpportunity] = useState({
@@ -121,6 +121,8 @@ function AdminOpportunities() {
     };
     return labels[type] || type;
   };
+
+  if (authLoading) return <div className="min-h-screen grid place-items-center text-muted-foreground">Loading…</div>;
 
   if (profile?.role !== "admin") {
     return (
