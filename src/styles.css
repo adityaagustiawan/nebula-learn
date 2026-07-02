@@ -188,3 +188,72 @@
       linear-gradient(90deg, oklch(0 0 0 / 0.06) 1px, transparent 1px);
   }
 }
+
+/* ──────────────────────────────────────────────
+   NebulaLearn Logo Animations
+   ────────────────────────────────────────────── */
+@keyframes nebula-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-4px) rotate(1deg); }
+  66%       { transform: translateY(-2px) rotate(-0.5deg); }
+}
+
+@keyframes nebula-glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.7))
+            drop-shadow(0 0 20px rgba(96, 165, 250, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(139, 92, 246, 1))
+            drop-shadow(0 0 40px rgba(96, 165, 250, 0.7))
+            drop-shadow(0 0 60px rgba(167, 139, 250, 0.4));
+  }
+}
+
+@keyframes nebula-shimmer {
+  0%   { opacity: 0; transform: translateX(-100%) skewX(-20deg); }
+  40%  { opacity: 0.15; }
+  60%  { opacity: 0.15; }
+  100% { opacity: 0; transform: translateX(200%) skewX(-20deg); }
+}
+
+@keyframes nebula-text-glow {
+  0%, 100% { text-shadow: 0 0 8px rgba(139, 92, 246, 0.3); }
+  50%       { text-shadow: 0 0 20px rgba(139, 92, 246, 0.7), 0 0 40px rgba(96, 165, 250, 0.3); }
+}
+
+/* Icon: float + glow pulse */
+.nebula-logo-icon {
+  animation:
+    nebula-float 4s ease-in-out infinite,
+    nebula-glow-pulse 3s ease-in-out infinite;
+  will-change: transform, filter;
+}
+
+/* Hover: intensify glow, scale up slightly */
+a:hover .nebula-logo-icon,
+.nebula-logo-icon:hover {
+  animation:
+    nebula-float 2s ease-in-out infinite,
+    nebula-glow-pulse 1.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Shimmer sweep on hover */
+.nebula-logo-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  animation: nebula-shimmer 3.5s ease-in-out infinite 1s;
+  will-change: transform, opacity;
+}
+
+/* Text subtle glow */
+.nebula-logo-text {
+  animation: nebula-text-glow 4s ease-in-out infinite;
+  will-change: text-shadow;
+}
+

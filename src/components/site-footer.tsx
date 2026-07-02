@@ -1,15 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { Sparkles } from "lucide-react";
+import { NebulaLogo } from "@/components/nebula-logo";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-border/60 mt-24">
       <div className="container mx-auto px-4 py-12 grid gap-8 md:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2 font-display font-bold mb-3">
-            <span className="grid h-7 w-7 place-items-center rounded-md gradient-primary"><Sparkles className="h-3.5 w-3.5 text-primary-foreground" /></span>
-            Nebula<span className="text-gradient">Learn</span>
-          </div>
+          <NebulaLogo size="sm" showText={true} asLink={false} />
           <p className="text-sm text-muted-foreground">Learn, build, and compete. The next-generation learning galaxy.</p>
         </div>
         <div>

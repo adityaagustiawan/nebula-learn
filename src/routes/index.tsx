@@ -89,7 +89,7 @@ function Home() {
             transition={{ delay: 0.6, duration: 0.5 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-3"
           >
-            <Link to="/courses"><Button size="lg" className="gradient-primary shadow-glow text-base h-12 px-7">Explore courses <ArrowRight className="ml-2 h-4 w-4" /></Button></Link>
+            <Link to="/login"><Button size="lg" className="gradient-primary shadow-glow text-base h-12 px-7">Explore courses <ArrowRight className="ml-2 h-4 w-4" /></Button></Link>
             <Link to="/competitions"><Button size="lg" variant="outline" className="text-base h-12 px-7 border-border/80">Join a hackathon</Button></Link>
           </motion.div>
 

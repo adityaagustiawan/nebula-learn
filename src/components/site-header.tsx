@@ -1,8 +1,9 @@
 import { Link, useRouter } from "@tanstack/react-router";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { LiveSyncBadge } from "@/components/learning/live-sync-badge";
+import { NebulaLogo } from "@/components/nebula-logo";
 import { useState } from "react";
 import { useTheme } from "@/contexts/theme-context";
 
@@ -24,12 +25,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 glass border-b border-border/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link to="/" className="flex items-center gap-2 font-display font-bold text-lg">
-          <span className="grid h-8 w-8 place-items-center rounded-lg gradient-primary shadow-glow">
-            <Sparkles className="h-4 w-4 text-primary-foreground" />
-          </span>
-          <span>Nebula<span className="text-gradient">Learn</span></span>
-        </Link>
+        <NebulaLogo size="md" showText={true} />
 
         <nav className="hidden md:flex items-center gap-1">
           {nav.map((n) => (
