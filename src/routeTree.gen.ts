@@ -17,6 +17,22 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as CompetitionsRouteImport } from './routes/competitions'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TalentIndexRouteImport } from './routes/talent/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as TalentSkillsRouteImport } from './routes/talent/skills'
+import { Route as TalentRewardsRouteImport } from './routes/talent/rewards'
+import { Route as TalentRecommendationsRouteImport } from './routes/talent/recommendations'
+import { Route as TalentProfileRouteImport } from './routes/talent/profile'
+import { Route as TalentPortfoliosRouteImport } from './routes/talent/portfolios'
+import { Route as TalentOpportunitiesRouteImport } from './routes/talent/opportunities'
+import { Route as TalentLeaderboardRouteImport } from './routes/talent/leaderboard'
+import { Route as TalentCertificatesRouteImport } from './routes/talent/certificates'
+import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
+import { Route as AdminVerificationRouteImport } from './routes/admin/verification'
+import { Route as AdminStudentsRouteImport } from './routes/admin/students'
+import { Route as AdminRewardsRouteImport } from './routes/admin/rewards'
+import { Route as AdminOpportunitiesRouteImport } from './routes/admin/opportunities'
+import { Route as CoursesSlugLearnLessonSlugRouteImport } from './routes/courses.$slug.learn.$lessonSlug'
 
 const WebinarsRoute = WebinarsRouteImport.update({
   id: '/webinars',
@@ -58,37 +74,166 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TalentIndexRoute = TalentIndexRouteImport.update({
+  id: '/talent/',
+  path: '/talent/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalentSkillsRoute = TalentSkillsRouteImport.update({
+  id: '/talent/skills',
+  path: '/talent/skills',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalentRewardsRoute = TalentRewardsRouteImport.update({
+  id: '/talent/rewards',
+  path: '/talent/rewards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalentRecommendationsRoute = TalentRecommendationsRouteImport.update({
+  id: '/talent/recommendations',
+  path: '/talent/recommendations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalentProfileRoute = TalentProfileRouteImport.update({
+  id: '/talent/profile',
+  path: '/talent/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalentPortfoliosRoute = TalentPortfoliosRouteImport.update({
+  id: '/talent/portfolios',
+  path: '/talent/portfolios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalentOpportunitiesRoute = TalentOpportunitiesRouteImport.update({
+  id: '/talent/opportunities',
+  path: '/talent/opportunities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalentLeaderboardRoute = TalentLeaderboardRouteImport.update({
+  id: '/talent/leaderboard',
+  path: '/talent/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalentCertificatesRoute = TalentCertificatesRouteImport.update({
+  id: '/talent/certificates',
+  path: '/talent/certificates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesSlugRoute = CoursesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CoursesRoute,
+} as any)
+const AdminVerificationRoute = AdminVerificationRouteImport.update({
+  id: '/admin/verification',
+  path: '/admin/verification',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminStudentsRoute = AdminStudentsRouteImport.update({
+  id: '/admin/students',
+  path: '/admin/students',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRewardsRoute = AdminRewardsRouteImport.update({
+  id: '/admin/rewards',
+  path: '/admin/rewards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminOpportunitiesRoute = AdminOpportunitiesRouteImport.update({
+  id: '/admin/opportunities',
+  path: '/admin/opportunities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesSlugLearnLessonSlugRoute =
+  CoursesSlugLearnLessonSlugRouteImport.update({
+    id: '/learn/$lessonSlug',
+    path: '/learn/$lessonSlug',
+    getParentRoute: () => CoursesSlugRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/competitions': typeof CompetitionsRoute
-  '/courses': typeof CoursesRoute
+  '/courses': typeof CoursesRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/drive': typeof DriveRoute
   '/login': typeof LoginRoute
   '/projects': typeof ProjectsRoute
   '/webinars': typeof WebinarsRoute
+  '/admin/opportunities': typeof AdminOpportunitiesRoute
+  '/admin/rewards': typeof AdminRewardsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/admin/verification': typeof AdminVerificationRoute
+  '/courses/$slug': typeof CoursesSlugRouteWithChildren
+  '/talent/certificates': typeof TalentCertificatesRoute
+  '/talent/leaderboard': typeof TalentLeaderboardRoute
+  '/talent/opportunities': typeof TalentOpportunitiesRoute
+  '/talent/portfolios': typeof TalentPortfoliosRoute
+  '/talent/profile': typeof TalentProfileRoute
+  '/talent/recommendations': typeof TalentRecommendationsRoute
+  '/talent/rewards': typeof TalentRewardsRoute
+  '/talent/skills': typeof TalentSkillsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/talent/': typeof TalentIndexRoute
+  '/courses/$slug/learn/$lessonSlug': typeof CoursesSlugLearnLessonSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/competitions': typeof CompetitionsRoute
-  '/courses': typeof CoursesRoute
+  '/courses': typeof CoursesRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/drive': typeof DriveRoute
   '/login': typeof LoginRoute
   '/projects': typeof ProjectsRoute
   '/webinars': typeof WebinarsRoute
+  '/admin/opportunities': typeof AdminOpportunitiesRoute
+  '/admin/rewards': typeof AdminRewardsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/admin/verification': typeof AdminVerificationRoute
+  '/courses/$slug': typeof CoursesSlugRouteWithChildren
+  '/talent/certificates': typeof TalentCertificatesRoute
+  '/talent/leaderboard': typeof TalentLeaderboardRoute
+  '/talent/opportunities': typeof TalentOpportunitiesRoute
+  '/talent/portfolios': typeof TalentPortfoliosRoute
+  '/talent/profile': typeof TalentProfileRoute
+  '/talent/recommendations': typeof TalentRecommendationsRoute
+  '/talent/rewards': typeof TalentRewardsRoute
+  '/talent/skills': typeof TalentSkillsRoute
+  '/admin': typeof AdminIndexRoute
+  '/talent': typeof TalentIndexRoute
+  '/courses/$slug/learn/$lessonSlug': typeof CoursesSlugLearnLessonSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/competitions': typeof CompetitionsRoute
-  '/courses': typeof CoursesRoute
+  '/courses': typeof CoursesRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/drive': typeof DriveRoute
   '/login': typeof LoginRoute
   '/projects': typeof ProjectsRoute
   '/webinars': typeof WebinarsRoute
+  '/admin/opportunities': typeof AdminOpportunitiesRoute
+  '/admin/rewards': typeof AdminRewardsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/admin/verification': typeof AdminVerificationRoute
+  '/courses/$slug': typeof CoursesSlugRouteWithChildren
+  '/talent/certificates': typeof TalentCertificatesRoute
+  '/talent/leaderboard': typeof TalentLeaderboardRoute
+  '/talent/opportunities': typeof TalentOpportunitiesRoute
+  '/talent/portfolios': typeof TalentPortfoliosRoute
+  '/talent/profile': typeof TalentProfileRoute
+  '/talent/recommendations': typeof TalentRecommendationsRoute
+  '/talent/rewards': typeof TalentRewardsRoute
+  '/talent/skills': typeof TalentSkillsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/talent/': typeof TalentIndexRoute
+  '/courses/$slug/learn/$lessonSlug': typeof CoursesSlugLearnLessonSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +246,22 @@ export interface FileRouteTypes {
     | '/login'
     | '/projects'
     | '/webinars'
+    | '/admin/opportunities'
+    | '/admin/rewards'
+    | '/admin/students'
+    | '/admin/verification'
+    | '/courses/$slug'
+    | '/talent/certificates'
+    | '/talent/leaderboard'
+    | '/talent/opportunities'
+    | '/talent/portfolios'
+    | '/talent/profile'
+    | '/talent/recommendations'
+    | '/talent/rewards'
+    | '/talent/skills'
+    | '/admin/'
+    | '/talent/'
+    | '/courses/$slug/learn/$lessonSlug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +272,22 @@ export interface FileRouteTypes {
     | '/login'
     | '/projects'
     | '/webinars'
+    | '/admin/opportunities'
+    | '/admin/rewards'
+    | '/admin/students'
+    | '/admin/verification'
+    | '/courses/$slug'
+    | '/talent/certificates'
+    | '/talent/leaderboard'
+    | '/talent/opportunities'
+    | '/talent/portfolios'
+    | '/talent/profile'
+    | '/talent/recommendations'
+    | '/talent/rewards'
+    | '/talent/skills'
+    | '/admin'
+    | '/talent'
+    | '/courses/$slug/learn/$lessonSlug'
   id:
     | '__root__'
     | '/'
@@ -121,17 +298,47 @@ export interface FileRouteTypes {
     | '/login'
     | '/projects'
     | '/webinars'
+    | '/admin/opportunities'
+    | '/admin/rewards'
+    | '/admin/students'
+    | '/admin/verification'
+    | '/courses/$slug'
+    | '/talent/certificates'
+    | '/talent/leaderboard'
+    | '/talent/opportunities'
+    | '/talent/portfolios'
+    | '/talent/profile'
+    | '/talent/recommendations'
+    | '/talent/rewards'
+    | '/talent/skills'
+    | '/admin/'
+    | '/talent/'
+    | '/courses/$slug/learn/$lessonSlug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompetitionsRoute: typeof CompetitionsRoute
-  CoursesRoute: typeof CoursesRoute
+  CoursesRoute: typeof CoursesRouteWithChildren
   DashboardRoute: typeof DashboardRoute
   DriveRoute: typeof DriveRoute
   LoginRoute: typeof LoginRoute
   ProjectsRoute: typeof ProjectsRoute
   WebinarsRoute: typeof WebinarsRoute
+  AdminOpportunitiesRoute: typeof AdminOpportunitiesRoute
+  AdminRewardsRoute: typeof AdminRewardsRoute
+  AdminStudentsRoute: typeof AdminStudentsRoute
+  AdminVerificationRoute: typeof AdminVerificationRoute
+  TalentCertificatesRoute: typeof TalentCertificatesRoute
+  TalentLeaderboardRoute: typeof TalentLeaderboardRoute
+  TalentOpportunitiesRoute: typeof TalentOpportunitiesRoute
+  TalentPortfoliosRoute: typeof TalentPortfoliosRoute
+  TalentProfileRoute: typeof TalentProfileRoute
+  TalentRecommendationsRoute: typeof TalentRecommendationsRoute
+  TalentRewardsRoute: typeof TalentRewardsRoute
+  TalentSkillsRoute: typeof TalentSkillsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  TalentIndexRoute: typeof TalentIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -192,19 +399,178 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/talent/': {
+      id: '/talent/'
+      path: '/talent'
+      fullPath: '/talent/'
+      preLoaderRoute: typeof TalentIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talent/skills': {
+      id: '/talent/skills'
+      path: '/talent/skills'
+      fullPath: '/talent/skills'
+      preLoaderRoute: typeof TalentSkillsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talent/rewards': {
+      id: '/talent/rewards'
+      path: '/talent/rewards'
+      fullPath: '/talent/rewards'
+      preLoaderRoute: typeof TalentRewardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talent/recommendations': {
+      id: '/talent/recommendations'
+      path: '/talent/recommendations'
+      fullPath: '/talent/recommendations'
+      preLoaderRoute: typeof TalentRecommendationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talent/profile': {
+      id: '/talent/profile'
+      path: '/talent/profile'
+      fullPath: '/talent/profile'
+      preLoaderRoute: typeof TalentProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talent/portfolios': {
+      id: '/talent/portfolios'
+      path: '/talent/portfolios'
+      fullPath: '/talent/portfolios'
+      preLoaderRoute: typeof TalentPortfoliosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talent/opportunities': {
+      id: '/talent/opportunities'
+      path: '/talent/opportunities'
+      fullPath: '/talent/opportunities'
+      preLoaderRoute: typeof TalentOpportunitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talent/leaderboard': {
+      id: '/talent/leaderboard'
+      path: '/talent/leaderboard'
+      fullPath: '/talent/leaderboard'
+      preLoaderRoute: typeof TalentLeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talent/certificates': {
+      id: '/talent/certificates'
+      path: '/talent/certificates'
+      fullPath: '/talent/certificates'
+      preLoaderRoute: typeof TalentCertificatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/$slug': {
+      id: '/courses/$slug'
+      path: '/$slug'
+      fullPath: '/courses/$slug'
+      preLoaderRoute: typeof CoursesSlugRouteImport
+      parentRoute: typeof CoursesRoute
+    }
+    '/admin/verification': {
+      id: '/admin/verification'
+      path: '/admin/verification'
+      fullPath: '/admin/verification'
+      preLoaderRoute: typeof AdminVerificationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/students': {
+      id: '/admin/students'
+      path: '/admin/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AdminStudentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/rewards': {
+      id: '/admin/rewards'
+      path: '/admin/rewards'
+      fullPath: '/admin/rewards'
+      preLoaderRoute: typeof AdminRewardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/opportunities': {
+      id: '/admin/opportunities'
+      path: '/admin/opportunities'
+      fullPath: '/admin/opportunities'
+      preLoaderRoute: typeof AdminOpportunitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/$slug/learn/$lessonSlug': {
+      id: '/courses/$slug/learn/$lessonSlug'
+      path: '/learn/$lessonSlug'
+      fullPath: '/courses/$slug/learn/$lessonSlug'
+      preLoaderRoute: typeof CoursesSlugLearnLessonSlugRouteImport
+      parentRoute: typeof CoursesSlugRoute
+    }
   }
 }
+
+interface CoursesSlugRouteChildren {
+  CoursesSlugLearnLessonSlugRoute: typeof CoursesSlugLearnLessonSlugRoute
+}
+
+const CoursesSlugRouteChildren: CoursesSlugRouteChildren = {
+  CoursesSlugLearnLessonSlugRoute: CoursesSlugLearnLessonSlugRoute,
+}
+
+const CoursesSlugRouteWithChildren = CoursesSlugRoute._addFileChildren(
+  CoursesSlugRouteChildren,
+)
+
+interface CoursesRouteChildren {
+  CoursesSlugRoute: typeof CoursesSlugRouteWithChildren
+}
+
+const CoursesRouteChildren: CoursesRouteChildren = {
+  CoursesSlugRoute: CoursesSlugRouteWithChildren,
+}
+
+const CoursesRouteWithChildren =
+  CoursesRoute._addFileChildren(CoursesRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompetitionsRoute: CompetitionsRoute,
-  CoursesRoute: CoursesRoute,
+  CoursesRoute: CoursesRouteWithChildren,
   DashboardRoute: DashboardRoute,
   DriveRoute: DriveRoute,
   LoginRoute: LoginRoute,
   ProjectsRoute: ProjectsRoute,
   WebinarsRoute: WebinarsRoute,
+  AdminOpportunitiesRoute: AdminOpportunitiesRoute,
+  AdminRewardsRoute: AdminRewardsRoute,
+  AdminStudentsRoute: AdminStudentsRoute,
+  AdminVerificationRoute: AdminVerificationRoute,
+  TalentCertificatesRoute: TalentCertificatesRoute,
+  TalentLeaderboardRoute: TalentLeaderboardRoute,
+  TalentOpportunitiesRoute: TalentOpportunitiesRoute,
+  TalentPortfoliosRoute: TalentPortfoliosRoute,
+  TalentProfileRoute: TalentProfileRoute,
+  TalentRecommendationsRoute: TalentRecommendationsRoute,
+  TalentRewardsRoute: TalentRewardsRoute,
+  TalentSkillsRoute: TalentSkillsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  TalentIndexRoute: TalentIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

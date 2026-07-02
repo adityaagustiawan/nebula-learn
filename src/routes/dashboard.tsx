@@ -9,7 +9,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Github, Cloud, BookOpen, Trophy, Save } from "lucide-react";
+import { Github, Cloud, BookOpen, Trophy, Save, Radio } from "lucide-react";
+import { LiveFeed } from "@/components/learning/live-feed";
+import { useMyEnrollments } from "@/hooks/use-learning";
+import { Progress } from "@/components/ui/progress";
 
 export const Route = createFileRoute("/dashboard")({
   component: DashboardPage,
@@ -21,6 +24,7 @@ function DashboardPage() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({ full_name: "", github_username: "", bio: "" });
   const [saving, setSaving] = useState(false);
+  const enrollments = useMyEnrollments();
 
   useEffect(() => { if (!loading && !user) navigate({ to: "/login" }); }, [loading, user, navigate]);
 
@@ -59,6 +63,21 @@ function DashboardPage() {
         <p className="mt-2 text-muted-foreground">Your learning command center.</p>
       </section>
 
+      {enrollments.length > 0 && (
+        <section className="container mx-auto px-4 pb-8 max-w-5xl">
+          <h2 className="text-xl font-bold flex items-center gap-2 mb-4"><Radio className="h-5 w-5 text-primary animate-pulse" /> Continue learning</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {enrollments.map((e) => (
+              <Link key={e.slug} to="/courses/$slug" params={{ slug: e.slug }} className="glass rounded-2xl p-5 hover:border-primary/40 transition">
+                <div className="font-display font-semibold">{e.title}</div>
+                <Progress value={e.progress} className="mt-3 h-2" />
+                <div className="text-xs text-muted-foreground mt-2">{e.progress}% complete</div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="container mx-auto px-4 pb-10 max-w-5xl grid md:grid-cols-2 lg:grid-cols-4 gap-4">
         {tiles.map((t) => (
           <Link key={t.to} to={t.to} className="glass rounded-2xl p-5 hover:border-primary/40 transition group">
@@ -67,6 +86,10 @@ function DashboardPage() {
             <div className="text-sm text-muted-foreground mt-1">{t.text}</div>
           </Link>
         ))}
+      </section>
+
+      <section className="container mx-auto px-4 pb-10 max-w-5xl grid lg:grid-cols-2 gap-6">
+        <LiveFeed limit={6} compact />
       </section>
 
       <section className="container mx-auto px-4 pb-16 max-w-2xl">

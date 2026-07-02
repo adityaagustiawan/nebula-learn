@@ -24,6 +24,9 @@ export type Database = {
           github_username: string | null
           id: string
           updated_at: string
+          role: string
+          major: string | null
+          total_points: number
         }
         Insert: {
           avatar_url?: string | null
@@ -34,6 +37,9 @@ export type Database = {
           github_username?: string | null
           id: string
           updated_at?: string
+          role?: string
+          major?: string | null
+          total_points?: number
         }
         Update: {
           avatar_url?: string | null
@@ -43,6 +49,267 @@ export type Database = {
           full_name?: string | null
           github_username?: string | null
           id?: string
+          updated_at?: string
+          role?: string
+          major?: string | null
+          total_points?: number
+        }
+        Relationships: []
+      }
+      skills: {
+        Row: {
+          id: string
+          user_id: string
+          skill_name: string
+          evidence_url: string | null
+          status: string
+          points: number | null
+          review_note: string | null
+          reviewed_by: string | null
+          reviewed_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          skill_name: string
+          evidence_url?: string | null
+          status?: string
+          points?: number | null
+          review_note?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          skill_name?: string
+          evidence_url?: string | null
+          status?: string
+          points?: number | null
+          review_note?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      portfolios: {
+        Row: {
+          id: string
+          user_id: string
+          type: string
+          title: string
+          description: string | null
+          evidence_url: string | null
+          status: string
+          points: number | null
+          review_note: string | null
+          reviewed_by: string | null
+          reviewed_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          type: string
+          title: string
+          description?: string | null
+          evidence_url?: string | null
+          status?: string
+          points?: number | null
+          review_note?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          type?: string
+          title?: string
+          description?: string | null
+          evidence_url?: string | null
+          status?: string
+          points?: number | null
+          review_note?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      certificates: {
+        Row: {
+          id: string
+          user_id: string
+          level: string
+          title: string
+          evidence_url: string | null
+          status: string
+          points: number | null
+          review_note: string | null
+          reviewed_by: string | null
+          reviewed_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          level: string
+          title: string
+          evidence_url?: string | null
+          status?: string
+          points?: number | null
+          review_note?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          level?: string
+          title?: string
+          evidence_url?: string | null
+          status?: string
+          points?: number | null
+          review_note?: string | null
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      points_transactions: {
+        Row: {
+          id: string
+          user_id: string
+          source_type: string
+          source_id: string
+          points: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          source_type: string
+          source_id: string
+          points: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          source_type?: string
+          source_id?: string
+          points?: number
+          created_at?: string
+        }
+        Relationships: []
+      }
+      rewards: {
+        Row: {
+          id: string
+          name: string
+          description: string | null
+          required_points: number
+          image_url: string | null
+          is_active: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          description?: string | null
+          required_points?: number
+          image_url?: string | null
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          description?: string | null
+          required_points?: number
+          image_url?: string | null
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      reward_claims: {
+        Row: {
+          id: string
+          user_id: string
+          reward_id: string
+          status: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          reward_id: string
+          status?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          reward_id?: string
+          status?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      opportunities: {
+        Row: {
+          id: string
+          title: string
+          description: string
+          type: string
+          required_skills: string[] | null
+          posted_by: string
+          is_active: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          title: string
+          description: string
+          type: string
+          required_skills?: string[] | null
+          posted_by: string
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          title?: string
+          description?: string
+          type?: string
+          required_skills?: string[] | null
+          posted_by?: string
+          is_active?: boolean
+          created_at?: string
           updated_at?: string
         }
         Relationships: []
@@ -74,6 +341,285 @@ export type Database = {
           size?: number
           storage_path?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      courses: {
+        Row: {
+          id: string
+          slug: string
+          title: string
+          category: string
+          level: string
+          hours: number
+          rating: number
+          enrolled_count: number
+          instructor: string
+          description: string
+          tag: string | null
+          external_url: string | null
+          updated_at: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          slug: string
+          title: string
+          category: string
+          level: string
+          hours?: number
+          rating?: number
+          enrolled_count?: number
+          instructor: string
+          description: string
+          tag?: string | null
+          external_url?: string | null
+          updated_at?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          slug?: string
+          title?: string
+          category?: string
+          level?: string
+          hours?: number
+          rating?: number
+          enrolled_count?: number
+          instructor?: string
+          description?: string
+          tag?: string | null
+          external_url?: string | null
+          updated_at?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
+      course_lessons: {
+        Row: {
+          id: string
+          course_id: string
+          slug: string
+          title: string
+          content: string
+          lesson_type: string
+          duration_min: number
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          course_id: string
+          slug: string
+          title: string
+          content: string
+          lesson_type?: string
+          duration_min?: number
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          course_id?: string
+          slug?: string
+          title?: string
+          content?: string
+          lesson_type?: string
+          duration_min?: number
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      enrollments: {
+        Row: {
+          id: string
+          user_id: string
+          course_id: string
+          progress_percent: number
+          last_lesson_id: string | null
+          enrolled_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          course_id: string
+          progress_percent?: number
+          last_lesson_id?: string | null
+          enrolled_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          course_id?: string
+          progress_percent?: number
+          last_lesson_id?: string | null
+          enrolled_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      lesson_progress: {
+        Row: {
+          id: string
+          user_id: string
+          lesson_id: string
+          completed: boolean
+          completed_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          lesson_id: string
+          completed?: boolean
+          completed_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          lesson_id?: string
+          completed?: boolean
+          completed_at?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      competitions: {
+        Row: {
+          id: string
+          slug: string
+          title: string
+          host: string
+          prize: string
+          starts_label: string
+          days_left: number
+          participants: number
+          tags: string[]
+          status: string
+          external_url: string | null
+          image_url: string | null
+          competition_type: string | null
+          description: string | null
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          slug: string
+          title: string
+          host: string
+          prize: string
+          starts_label: string
+          days_left?: number
+          participants?: number
+          tags?: string[]
+          status: string
+          external_url?: string | null
+          image_url?: string | null
+          competition_type?: string | null
+          description?: string | null
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          slug?: string
+          title?: string
+          host?: string
+          prize?: string
+          starts_label?: string
+          days_left?: number
+          participants?: number
+          tags?: string[]
+          status?: string
+          external_url?: string | null
+          image_url?: string | null
+          competition_type?: string | null
+          description?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      webinars: {
+        Row: {
+          id: string
+          slug: string
+          title: string
+          speaker: string
+          role: string
+          starts_at: string
+          duration_min: number
+          attendees: number
+          status: string
+          topic: string
+          external_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          slug: string
+          title: string
+          speaker: string
+          role: string
+          starts_at: string
+          duration_min: number
+          attendees?: number
+          status: string
+          topic: string
+          external_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          slug?: string
+          title?: string
+          speaker?: string
+          role?: string
+          starts_at?: string
+          duration_min?: number
+          attendees?: number
+          status?: string
+          topic?: string
+          external_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      feed_items: {
+        Row: {
+          id: string
+          external_id: string
+          source: string
+          title: string
+          url: string
+          summary: string | null
+          category: string
+          published_at: string | null
+          synced_at: string
+        }
+        Insert: {
+          id?: string
+          external_id: string
+          source: string
+          title: string
+          url: string
+          summary?: string | null
+          category?: string
+          published_at?: string | null
+          synced_at?: string
+        }
+        Update: {
+          id?: string
+          external_id?: string
+          source?: string
+          title?: string
+          url?: string
+          summary?: string | null
+          category?: string
+          published_at?: string | null
+          synced_at?: string
         }
         Relationships: []
       }

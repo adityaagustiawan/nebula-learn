@@ -3,8 +3,10 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { webinars } from "@/lib/catalog";
+import { useLiveWebinars } from "@/hooks/use-live-catalog";
 import { Radio, Play, Users, Calendar } from "lucide-react";
+import { LiveFeed } from "@/components/learning/live-feed";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/webinars")({
   component: WebinarsPage,
@@ -12,6 +14,7 @@ export const Route = createFileRoute("/webinars")({
 });
 
 function WebinarsPage() {
+  const webinars = useLiveWebinars();
   const live = webinars.find((w) => w.status === "Live");
   const upcoming = webinars.filter((w) => w.status === "Upcoming");
   const replays = webinars.filter((w) => w.status === "Replay");
@@ -61,7 +64,7 @@ function WebinarsPage() {
                 <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {w.startsAt}</span>
                 <span>{w.durationMin}min</span>
               </div>
-              <Button variant="outline" className="mt-4 w-full">Set reminder</Button>
+              <Button variant="outline" className="mt-4 w-full" onClick={() => toast.success(`Reminder set for ${w.title}`)}>Set reminder</Button>
             </article>
           ))}
         </div>
@@ -85,6 +88,9 @@ function WebinarsPage() {
         </div>
       </section>
 
+      <section className="container mx-auto px-4 pb-16 max-w-4xl">
+        <LiveFeed limit={5} compact />
+      </section>
       <SiteFooter />
     </div>
   );

@@ -11,6 +11,10 @@ import {
 import appCss from "../styles.css?url";
 import { AuthProvider } from "@/hooks/use-auth";
 import { Toaster } from "@/components/ui/sonner";
+import { PlatformBootstrap } from "@/components/learning/platform-bootstrap";
+import { RealtimeSyncProvider } from "@/contexts/realtime-sync-context";
+import { OpeningAnimation } from "@/components/ui/opening-animation";
+import { ThemeProvider } from "@/contexts/theme-context";
 
 function NotFoundComponent() {
   return (
@@ -70,7 +74,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head><HeadContent /></head>
       <body>
         {children}
@@ -84,10 +88,17 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Outlet />
-        <Toaster />
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <RealtimeSyncProvider>
+            <PlatformBootstrap />
+            <OpeningAnimation>
+              <Outlet />
+            </OpeningAnimation>
+            <Toaster />
+          </RealtimeSyncProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
